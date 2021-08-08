@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsBreeze"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.home.HomeActivity">
+        <activity android:name=".ui.savedArticle.SavedArticleActivity"></activity>
+        <activity android:name=".ui.articleDetails.NewsArticleDetailsActivity" />
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

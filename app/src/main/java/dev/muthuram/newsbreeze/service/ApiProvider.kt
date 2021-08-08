@@ -2,16 +2,18 @@ package dev.muthuram.newsbreeze.service
 
 import android.content.Context
 import dev.muthuram.newsbreeze.BuildConfig
+import dev.muthuram.newsbreeze.constants.API_KEY
 import dev.muthuram.newsbreeze.helper.defaultValue
 import dev.muthuram.newsbreeze.helper.isInternetAvailable
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 object ApiProvider: KoinComponent {
@@ -23,13 +25,14 @@ object ApiProvider: KoinComponent {
         return Cache(context.cacheDir, cacheSize)
     }
 
-    val onlineInterceptor = Interceptor{ chain ->
-        val response = chain.proceed(chain.request())
+    private val onlineInterceptor = Interceptor{ chain ->
         val maxAge = 60
-        return@Interceptor response.newBuilder()
+        val request = chain.request().newBuilder()
+            .header("Authorization", API_KEY)
             .header("Cache-Control", "public, max-age=$maxAge")
             .removeHeader("Pragma")
             .build()
+        chain.proceed(request)
     }
 
     val offlineInterceptor = Interceptor{ chain ->
@@ -55,14 +58,17 @@ object ApiProvider: KoinComponent {
             addInterceptor(offlineInterceptor)
             addNetworkInterceptor(onlineInterceptor)
             cache(customCache())
+            connectTimeout(60, TimeUnit.SECONDS)
+            readTimeout(60, TimeUnit.SECONDS)
+            writeTimeout(60, TimeUnit.SECONDS)
         }.build()
 
     private val retrofit = Retrofit.Builder().apply {
-//        baseUrl()
+        baseUrl(BuildConfig.BASE_URL)
         addConverterFactory(GsonConverterFactory.create())
         client(httpClient())
     }.build()
 
-    val client : ServiceManager by lazy { retrofit.create(ServiceManager::class.java) }
+    val client : ServiceApi by lazy { retrofit.create(ServiceApi::class.java) }
 
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">NewsBreeze</string>
-    <string name="str_search">Search</string>
+    <string name="str_search">Search by title</string>
     <string name="str_read">Read</string>
     <string name="str_save">Save</string>
     <string name="str_saved">Saved</string>

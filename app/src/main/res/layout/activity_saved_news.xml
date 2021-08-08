@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/uiTvBack"
+        android:id="@+id/uiIvBack"
         android:src="@drawable/ic_black_back_arrow"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
@@ -25,9 +25,9 @@
         android:textSize="28sp"
         android:textColor="@color/news_green"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/uiTvBack"
+        app:layout_constraintTop_toTopOf="@id/uiIvBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/uiTvBack"/>
+        app:layout_constraintBottom_toBottomOf="@id/uiIvBack"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -128,5 +128,16 @@
             tools:listitem="@layout/model_saved_news"/>
 
     </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/uiIvNoSavedNewsIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uiCvSavedCardContainer"
+        app:srcCompat="@drawable/ic_no_service" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
