@@ -1,16 +1,17 @@
 package dev.muthuram.newsbreeze.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.muthuram.newsbreeze.data.model.ArticleDetails
 import dev.muthuram.newsbreeze.data.model.NavigationModel
+import dev.muthuram.newsbreeze.data.model.Trigger
 import dev.muthuram.newsbreeze.handler.CustomResponse
 import dev.muthuram.newsbreeze.helper.defaultValue
 import dev.muthuram.newsbreeze.helper.toArrayList
+import dev.muthuram.newsbreeze.helper.trigger
 import dev.muthuram.newsbreeze.repository.NewsRepository
 import dev.muthuram.newsbreeze.ui.articleDetails.NewsArticleDetailsActivity
 import dev.muthuram.newsbreeze.ui.articleDetails.NewsArticleDetailsViewModel.Companion.KEY_ARTICLE_DETAILS
@@ -24,11 +25,13 @@ class HomeViewModel(
     private val navigateLd = MutableLiveData<NavigationModel>()
     private val errorLd = MutableLiveData<String>()
     private val loaderLd = MutableLiveData<Boolean>()
+    private val articleSavedLd = MutableLiveData<Trigger>()
     private val getNewsHeadLinesLD = MutableLiveData<ArrayList<ArticleDetails>>()
 
     val navigate: LiveData<NavigationModel> = navigateLd
     val error: LiveData<String> = errorLd
     val loader: LiveData<Boolean> = loaderLd
+    val articleSaved : LiveData<Trigger> = articleSavedLd
     val getNewsHeadLines: LiveData<ArrayList<ArticleDetails>> = getNewsHeadLinesLD
 
     init {
@@ -52,7 +55,8 @@ class HomeViewModel(
     }
 
     fun saveArticle(articleDetails: ArticleDetails) {
-
+        newsRepository.saveArticlesToReadLater(articleDetails)
+        articleSavedLd.trigger()
     }
 
     fun onTextSearched(searchedText : String?) {
@@ -69,5 +73,9 @@ class HomeViewModel(
         navigateLd.value = NavigationModel(
             SavedArticleActivity::class.java
         )
+    }
+
+    fun onActivityDestroyed() {
+        newsRepository.clearSavedArticles()
     }
 }

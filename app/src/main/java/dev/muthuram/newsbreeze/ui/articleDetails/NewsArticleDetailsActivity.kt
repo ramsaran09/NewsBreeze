@@ -1,11 +1,13 @@
 package dev.muthuram.newsbreeze.ui.articleDetails
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import dev.muthuram.newsbreeze.R
 import dev.muthuram.newsbreeze.constants.DATE_FORMAT
 import dev.muthuram.newsbreeze.data.model.ArticleDetails
+import dev.muthuram.newsbreeze.data.model.Trigger
 import dev.muthuram.newsbreeze.helper.formatTo
 import dev.muthuram.newsbreeze.helper.observeLiveData
 import kotlinx.android.synthetic.main.activity_article_details.*
@@ -25,10 +27,12 @@ class NewsArticleDetailsActivity : AppCompatActivity() {
 
     private fun setUpUi() {
         newsArticleDetailsViewModel.showArticleInfo.observeLiveData(this,::displayArticleDetails)
+        newsArticleDetailsViewModel.articleSaved.observeLiveData(this, ::onArticleSaved)
     }
 
     private fun setUpListeners() {
         uiIvBack.setOnClickListener { onBackPressed() }
+        uiBtSave.setOnClickListener { newsArticleDetailsViewModel.saveArticle() }
     }
 
     private fun displayArticleDetails(articleDetails: ArticleDetails) {
@@ -42,6 +46,9 @@ class NewsArticleDetailsActivity : AppCompatActivity() {
                 .load(articleDetails.urlToImage.trim())
                 .into(uiIvNewsImage)
         }
+    }
 
+    private fun onArticleSaved(t : Trigger) {
+        Toast.makeText(this, getString(R.string.str_saved_successfully), Toast.LENGTH_LONG).show()
     }
 }

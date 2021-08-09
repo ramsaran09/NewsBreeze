@@ -107,28 +107,6 @@
         app:layout_constraintEnd_toEndOf="@id/uiCvSearchContainer"
         app:layout_constraintTop_toTopOf="@id/uiTvCaptionToday" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/uiCvSavedCardContainer"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="5dp"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/uiTvCaptionToday">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/uiRvSavedNews"
-            tools:listitem="@layout/model_saved_news"/>
-
-    </androidx.cardview.widget.CardView>
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/uiIvNoSavedNewsIcon"
         android:layout_width="100dp"
@@ -137,7 +115,42 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/uiCvSavedCardContainer"
+        app:layout_constraintTop_toBottomOf="@id/uiTvCaptionToday"
         app:srcCompat="@drawable/ic_no_service" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/uiTvCaptionNoSavedNews"
+        android:text="@string/str_no_news_found"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/uiIvNoSavedNewsIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/uiCvSavedCardContainer"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="5dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uiTvCaptionToday">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/uiRvSavedNews"
+            tools:listitem="@layout/model_saved_news"/>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

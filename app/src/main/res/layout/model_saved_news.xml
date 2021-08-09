@@ -3,76 +3,92 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/uiClSavedNews"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:id="@+id/uiCvSavedImageContainer"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        app:cardCornerRadius="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/uiIvSavedNewsImage"/>
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/uiCvSavedImageContainer"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/uiIvSavedNewsImage"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uiTvHashTag"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/news_green"
+                app:layout_constraintStart_toEndOf="@id/uiCvSavedImageContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/uiCvSavedImageContainer"
+                tools:text="#protest"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uiTvSavedTitle"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:maxLines="3"
+                android:ellipsize="end"
+                app:layout_constraintStart_toEndOf="@id/uiCvSavedImageContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/uiTvHashTag"
+                tools:text="Huge Massacare on tamil Nadu happened yester night"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uiTvSavedNewDate"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toEndOf="@id/uiCvSavedImageContainer"
+                app:layout_constraintTop_toBottomOf="@id/uiTvSavedTitle"
+                tools:text="25/10/2020"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uiTvSavedNewsAuthor"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintStart_toEndOf="@id/uiTvSavedNewDate"
+                app:layout_constraintTop_toBottomOf="@id/uiTvSavedTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="sachin tendulkar"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/uiTvHashTag"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/news_green"
-        app:layout_constraintStart_toEndOf="@id/uiCvSavedImageContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/uiCvSavedImageContainer"
-        tools:text="#protest"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/uiTvSavedTitle"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="5dp"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/uiCvSavedImageContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/uiTvHashTag"
-        tools:text="Huge Massacare on tamil Nadu happened yester night"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/uiTvSavedNewDate"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@id/uiCvSavedImageContainer"
-        app:layout_constraintTop_toBottomOf="@id/uiTvSavedTitle"
-        tools:text="25/10/2020"/>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/uiTvSavedNewsAuthor"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintStart_toEndOf="@id/uiTvSavedNewDate"
-        app:layout_constraintTop_toBottomOf="@id/uiTvSavedTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="sachin tendulkar"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

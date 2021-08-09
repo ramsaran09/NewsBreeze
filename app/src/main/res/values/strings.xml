@@ -6,4 +6,6 @@
     <string name="str_saved">Saved</string>
     <string name="str_today">Today</string>
     <string name="str_see_all">See all..</string>
+    <string name="str_no_news_found">No News Found</string>
+    <string name="str_saved_successfully">Saved Successfully</string>
 </resources>

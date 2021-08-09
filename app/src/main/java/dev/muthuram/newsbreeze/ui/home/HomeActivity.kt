@@ -9,6 +9,7 @@ import dev.muthuram.newsbreeze.R
 import dev.muthuram.newsbreeze.adapter.NewsArticlesAdapter
 import dev.muthuram.newsbreeze.data.model.ArticleDetails
 import dev.muthuram.newsbreeze.data.model.NavigationModel
+import dev.muthuram.newsbreeze.data.model.Trigger
 import dev.muthuram.newsbreeze.helper.afterTextChangeListener
 import dev.muthuram.newsbreeze.helper.observeLiveData
 import dev.muthuram.newsbreeze.helper.startActivity
@@ -39,6 +40,7 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.navigate.observeLiveData(this, ::navigate)
         homeViewModel.error.observeLiveData(this, ::handleError)
         homeViewModel.loader.observeLiveData(this, ::handleLoaderVisibility)
+        homeViewModel.articleSaved.observeLiveData(this, ::onArticleSaved)
         homeViewModel.getNewsHeadLines.observeLiveData(this,::updateArticleList)
     }
 
@@ -70,6 +72,10 @@ class HomeActivity : AppCompatActivity() {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show()
     }
 
+    private fun onArticleSaved(t : Trigger) {
+        Toast.makeText(this, getString(R.string.str_saved_successfully), Toast.LENGTH_LONG).show()
+    }
+
     private fun handleLoaderVisibility(isLoading: Boolean) {
         uiPbLoader.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
@@ -83,5 +89,10 @@ class HomeActivity : AppCompatActivity() {
             homeViewModel.onTextSearched(text).toString()
                 .replace("[^A-Za-z0-9 ]".toRegex(), "").lowercase()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        homeViewModel.onActivityDestroyed()
     }
 }
