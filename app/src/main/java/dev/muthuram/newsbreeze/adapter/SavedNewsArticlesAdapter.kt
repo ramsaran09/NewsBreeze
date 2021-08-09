@@ -31,9 +31,7 @@ class SavedNewsArticlesAdapter(
     }
 
     override fun onBindViewHolder(holder: SavedNewsArticleViewHolder, position: Int) {
-        Log.d("savedArticleInHolder",articles.toString())
         val savedArticle = articles[position]
-        Log.d("positionedSavedArticle",savedArticle.toString())
         with(holder) {
             tvSavedTitle.text = savedArticle.title
             tvSavedNewDate.text = savedArticle.publishedAt?.formatTo(DATE_FORMAT)
@@ -52,7 +50,6 @@ class SavedNewsArticlesAdapter(
     fun updateList(articleList : ArrayList<ArticleDetails>){
         articles.clear()
         articles.addAll(articleList)
-        Log.d("savedArticle",articles.toString())
         notifyDataSetChanged()
     }
 

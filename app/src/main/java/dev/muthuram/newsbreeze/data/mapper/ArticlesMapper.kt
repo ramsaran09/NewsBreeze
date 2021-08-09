@@ -1,14 +1,13 @@
 package dev.muthuram.newsbreeze.data.mapper
 
 import com.google.gson.Gson
-import dev.muthuram.newsbreeze.constants.DATE_FORMAT
 import dev.muthuram.newsbreeze.constants.SUCCESS_STATUS
 import dev.muthuram.newsbreeze.data.model.ArticleDetails
 import dev.muthuram.newsbreeze.data.model.NewsArticleResponseModel
 import dev.muthuram.newsbreeze.data.model.SourceDetails
 import dev.muthuram.newsbreeze.handler.CustomResponse
 import dev.muthuram.newsbreeze.handler.ServiceException
-import dev.muthuram.newsbreeze.helper.*
+import dev.muthuram.newsbreeze.helper.defaultValue
 import retrofit2.Response
 
 class ArticlesMapper {

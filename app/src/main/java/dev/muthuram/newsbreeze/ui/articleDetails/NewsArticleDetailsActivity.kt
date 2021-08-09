@@ -39,7 +39,7 @@ class NewsArticleDetailsActivity : AppCompatActivity() {
         uiTvNewsTitle.text = articleDetails.title
         uiTvDate.text = articleDetails.publishedAt?.formatTo(DATE_FORMAT)
         uiTvAuthorName.text = articleDetails.author
-        uiTvDescription.text = articleDetails.description
+        uiTvDescription.text = articleDetails.content
         uiTvAuthorRole.text = articleDetails.source.name
         if (articleDetails.urlToImage?.trim()?.length != 0 && articleDetails.urlToImage?.isNotBlank() == true) {
             Picasso.with(this)

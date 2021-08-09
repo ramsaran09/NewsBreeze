@@ -1,7 +1,6 @@
 package dev.muthuram.newsbreeze.ui.savedArticle
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,9 +24,7 @@ class SavedArticleViewModel(
 
     init {
         val savedArticles = newsRepository.getSavedArticles()
-        Log.d("savedArticle",savedArticles.toString())
         if (savedArticles?.size != 0 && !savedArticles.isNullOrEmpty()) {
-            Log.d("savedArticles",savedArticles.toString())
             getSavedNewsLD.value = savedArticles!!
         } else noSavedNewsLd.value = true
     }

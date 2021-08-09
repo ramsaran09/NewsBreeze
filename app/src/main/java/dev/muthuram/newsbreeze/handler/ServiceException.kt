@@ -1,9 +1,10 @@
 package dev.muthuram.newsbreeze.handler
 
-
+import dev.muthuram.newsbreeze.constants.ERROR_MESSAGE
+import dev.muthuram.newsbreeze.constants.SERVER_ERROR
 
 
 data class ServiceException(
-    val code : String? = "Server error",
-    val message: String? = "Something went wrong in the server. Please try again after some time",
+    val code : String? = SERVER_ERROR,
+    val message: String? = ERROR_MESSAGE,
 )

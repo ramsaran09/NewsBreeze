@@ -1,11 +1,13 @@
 package dev.muthuram.newsbreeze.manager
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dev.muthuram.newsbreeze.data.model.ArticleDetails
 
+@VisibleForTesting
 class PreferenceManager(
     context: Context
 ) {
@@ -15,7 +17,7 @@ class PreferenceManager(
     }
 
     private val appPreference = context.getSharedPreferences("AppData", Context.MODE_PRIVATE)
-    private val savedNewsArticle : ArrayList<ArticleDetails> = arrayListOf()
+    private val savedNewsArticle : MutableSet<ArticleDetails> = mutableSetOf()
 
     fun saveArticles(articleDetailsList : ArticleDetails) {
         appPreference.edit {

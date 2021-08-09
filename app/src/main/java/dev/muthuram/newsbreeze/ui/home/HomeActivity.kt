@@ -1,5 +1,6 @@
 package dev.muthuram.newsbreeze.ui.home
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -15,6 +16,8 @@ import dev.muthuram.newsbreeze.helper.observeLiveData
 import dev.muthuram.newsbreeze.helper.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeActivity : AppCompatActivity() {
 
@@ -25,8 +28,8 @@ class HomeActivity : AppCompatActivity() {
             ::onItemClickListener,
             ::onSaveClickListener
         )
-
     private val linearLayoutManager by lazy { LinearLayoutManager(this@HomeActivity) }
+    private val calendar: Calendar by lazy { Calendar.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +94,28 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private val fromDatePicker by lazy {
+        DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth -> homeViewModel.onFromDateSelected(year, month, dayOfMonth) },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
+
+    private val toDatePicker by lazy {
+        DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth -> homeViewModel.onToDateSelected(year, month, dayOfMonth) },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
+
+    override fun onStop() {
+        super.onStop()
         homeViewModel.onActivityDestroyed()
     }
 }
